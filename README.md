@@ -18,9 +18,11 @@ Shared runtime dependencies (FFmpeg, Ghostscript, ImageMagick) are tracked and i
 
 ## Status
 
-`PdfToPng`, `MergePdf`, `FfmpegConvert`, `ReduceForYouTube`, and `MakePdf` are implemented, each backed by real logic in `MediaSuite.Core` (Ghostscript, FFmpeg, and ImageMagick wrappers) with unit tests plus scratch end-to-end verification against real installs of those tools where possible. `MediaSuite.Manager` (the install/update dashboard) is still a placeholder stub.
+All five right-click tools (`PdfToPng`, `MergePdf`, `FfmpegConvert`, `ReduceForYouTube`, `MakePdf`) and the Manager are implemented.
 
-None of the WinForms/WPF UI code has been compiled or run on Windows yet — this has all been developed and tested from a Linux environment, where `net8.0-windows` projects cannot be built at all. Each tool's UI needs a real click-through on Windows before being trusted, and `MakePdf`'s Office COM automation in particular is entirely unverified since it depends on Word/PowerPoint being installed, which has no equivalent in this environment even for partial testing.
+The Manager tracks FFmpeg, Ghostscript, and ImageMagick as shared dependencies, each installed/updated/removed via its real GitHub release (`ArtifexSoftware/ghostpdl-downloads`, `GyanD/codexffmpeg`, `ImageMagick/ImageMagick` respectively — all three confirmed to publish genuine Windows binaries there, not just source). It shows Installed/Latest/Status per component with manual-only "Check for Updates" (no polling), and registers/removes each tool's own Explorer right-click verb independently. The five tools themselves ship bundled with the Manager as one unit (there's no per-tool release pipeline for a suite this size), so "Install"/"Remove" for a tool just toggles its context-menu registration rather than downloading anything.
+
+None of the WinForms/WPF UI code has been compiled or run on Windows — this has all been developed from a Linux environment, where `net8.0-windows` projects cannot be built at all (confirmed: even with the .NET 8 SDK installed, the required `Microsoft.NET.Sdk.WindowsDesktop` MSBuild SDK isn't available on Linux). Every tool's UI, and the Manager's registry/installer/PATH-manipulation code in particular, needs a real click-through on Windows before being trusted. `MakePdf`'s Office COM automation is the least-verified piece of all, since this environment has no Office and no COM subsystem whatsoever.
 
 ## Building
 
