@@ -1,0 +1,19 @@
+## .NET / Visual Studio
+bin/
+obj/
+out/
+publish/
+.vs/
+*.user
+*.suo
+
+## Rider / VS Code
+.idea/
+.vscode/
+
+## Test results
+[Tt]est[Rr]esult*/
+*.trx
+
+## Inno Setup output
+installer/Output/
