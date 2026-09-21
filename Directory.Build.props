@@ -6,6 +6,9 @@
     <LangVersion>latest</LangVersion>
     <Product>Media Tools Suite</Product>
     <Version>0.1.0</Version>
+    <Company>UaHardwick</Company>
+    <Authors>UaHardwick</Authors>
+    <Copyright>Copyright © UaHardwick</Copyright>
   </PropertyGroup>
 
 </Project>
