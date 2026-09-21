@@ -11,4 +11,14 @@
     <Copyright>Copyright © UaHardwick</Copyright>
   </PropertyGroup>
 
+  <!-- Applies only to the Manager and the five WinExe tool projects, not
+       Core or its tests, which stay plain library builds. -->
+  <PropertyGroup Condition="'$(OutputType)' == 'WinExe'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
 </Project>
