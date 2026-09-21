@@ -64,6 +64,37 @@ public sealed class GhostscriptPdfConverter
             throw new PdfReadException(pdfPath, string.Join(Environment.NewLine, errorLines));
     }
 
+    public async Task MergeAsync(
+        IReadOnlyList<string> pdfPathsInOrder,
+        string outputPdfPath,
+        CancellationToken cancellationToken = default)
+    {
+        if (pdfPathsInOrder.Count < 2)
+            throw new ArgumentException("At least two PDFs are required to merge.", nameof(pdfPathsInOrder));
+
+        var errorLines = new List<string>();
+
+        var arguments = new List<string>
+        {
+            "-q",
+            "-dBATCH",
+            "-dNOPAUSE",
+            "-dSAFER",
+            "-sDEVICE=pdfwrite",
+            $"-sOutputFile={outputPdfPath}",
+        };
+        arguments.AddRange(pdfPathsInOrder);
+
+        await ProcessRunner.RunAsync(
+            _ghostscriptExecutablePath,
+            arguments,
+            onErrorLine: errorLines.Add,
+            cancellationToken: cancellationToken).ConfigureAwait(false);
+
+        if (!File.Exists(outputPdfPath))
+            throw new PdfReadException(outputPdfPath, string.Join(Environment.NewLine, errorLines));
+    }
+
     internal static int ParsePageCount(string pdfPath, IReadOnlyList<string> outputLines, IReadOnlyList<string> errorLines)
     {
         var combinedError = string.Join(Environment.NewLine, errorLines);
