@@ -1,3 +1,5 @@
+using MediaSuite.Core.Processes;
+
 namespace MediaSuite.Core.Pdf;
 
 /// <summary>
@@ -9,26 +11,8 @@ public static class GhostscriptLocator
 {
     private const string ExecutableName = "gswin64c.exe";
 
-    public static string? Find() => FindOnEnvironmentPath() ?? FindInDefaultInstallLocation();
-
-    private static string? FindOnEnvironmentPath()
-    {
-        var pathVariable = Environment.GetEnvironmentVariable("PATH");
-        if (string.IsNullOrEmpty(pathVariable))
-            return null;
-
-        foreach (var directory in pathVariable.Split(Path.PathSeparator))
-        {
-            if (directory.Length == 0)
-                continue;
-
-            var candidate = Path.Combine(directory, ExecutableName);
-            if (File.Exists(candidate))
-                return candidate;
-        }
-
-        return null;
-    }
+    public static string? Find() =>
+        PathExecutableLocator.FindOnEnvironmentPath(ExecutableName) ?? FindInDefaultInstallLocation();
 
     private static string? FindInDefaultInstallLocation()
     {
