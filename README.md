@@ -11,14 +11,16 @@ Windows 10/11 installer and set of Explorer right-click tools for a media/church
   - `MergePdf` — "Merge PDFs"
   - `FfmpegConvert` — "Convert with FFMPEG"
   - `ReduceForYouTube` — "Reduce for YouTube PNG (under 2 MB)"
-  - `OfficeToPdf` — Word/PowerPoint → PDF via Office COM automation
+  - `MakePdf` — "Make PDF" (Word/PowerPoint → PDF via Office COM automation)
 - `tests/MediaSuite.Core.Tests` — xUnit tests for `MediaSuite.Core`.
 
 Shared runtime dependencies (FFmpeg, Ghostscript, ImageMagick) are tracked and installed/updated by the Manager into their normal Windows locations. NDI Tools is out of scope for this installer.
 
 ## Status
 
-Scaffolding stage: `MediaSuite.Core` has real logic (validation, page-range parsing, unique-path numbering, process running) with tests. The Manager and the five tool projects are placeholder stubs pending implementation.
+`PdfToPng`, `MergePdf`, `FfmpegConvert`, `ReduceForYouTube`, and `MakePdf` are implemented, each backed by real logic in `MediaSuite.Core` (Ghostscript, FFmpeg, and ImageMagick wrappers) with unit tests plus scratch end-to-end verification against real installs of those tools where possible. `MediaSuite.Manager` (the install/update dashboard) is still a placeholder stub.
+
+None of the WinForms/WPF UI code has been compiled or run on Windows yet — this has all been developed and tested from a Linux environment, where `net8.0-windows` projects cannot be built at all. Each tool's UI needs a real click-through on Windows before being trusted, and `MakePdf`'s Office COM automation in particular is entirely unverified since it depends on Word/PowerPoint being installed, which has no equivalent in this environment even for partial testing.
 
 ## Building
 

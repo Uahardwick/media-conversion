@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSuite.Tools.FfmpegConv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSuite.Tools.ReduceForYouTube", "src\MediaSuite.Tools.ReduceForYouTube\MediaSuite.Tools.ReduceForYouTube.csproj", "{31C04A85-DA2E-4A03-924F-1F0FE76580B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSuite.Tools.OfficeToPdf", "src\MediaSuite.Tools.OfficeToPdf\MediaSuite.Tools.OfficeToPdf.csproj", "{6DB5DC94-4B89-4D64-BFDF-98584776F7E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSuite.Tools.MakePdf", "src\MediaSuite.Tools.MakePdf\MediaSuite.Tools.MakePdf.csproj", "{6DB5DC94-4B89-4D64-BFDF-98584776F7E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

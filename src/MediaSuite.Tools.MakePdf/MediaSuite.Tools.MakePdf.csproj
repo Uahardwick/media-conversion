@@ -7,8 +7,8 @@
     <ApplicationVisualStyles>true</ApplicationVisualStyles>
     <ApplicationUseCompatibleTextRendering>false</ApplicationUseCompatibleTextRendering>
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
-    <AssemblyName>OfficeToPdf</AssemblyName>
-    <RootNamespace>MediaSuite.Tools.OfficeToPdf</RootNamespace>
+    <AssemblyName>MakePdf</AssemblyName>
+    <RootNamespace>MediaSuite.Tools.MakePdf</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
