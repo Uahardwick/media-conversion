@@ -13,4 +13,17 @@
     <ProjectReference Include="..\MediaSuite.Core\MediaSuite.Core.csproj" />
   </ItemGroup>
 
+  <!-- UseWPF projects don't get the same base set of implicit usings that
+       plain library/WinForms projects do (confirmed: System.IO,
+       System.Collections.Generic, System.Linq, and System.Threading(.Tasks)
+       are all missing here even with ImplicitUsings enabled), so they're
+       declared explicitly instead of relying on that mechanism. -->
+  <ItemGroup>
+    <Using Include="System.IO" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Threading.Tasks" />
+  </ItemGroup>
+
 </Project>

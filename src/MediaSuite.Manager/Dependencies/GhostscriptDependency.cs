@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net.Http;
 using MediaSuite.Core.Pdf;
 using MediaSuite.Core.Processes;

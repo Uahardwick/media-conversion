@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net.Http;
 
 namespace MediaSuite.Manager.Shell;
