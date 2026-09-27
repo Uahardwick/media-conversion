@@ -13,17 +13,21 @@ Windows.
 
 ## Steps
 
-1. Publish every project in Release configuration (each one self-contained,
-   single-file, `win-x64`, per the settings in the repo's
-   `Directory.Build.props`):
+1. Publish every project in Release configuration, self-contained and
+   single-file for `win-x64`. The `-r`/`--self-contained` flags must be
+   passed explicitly on the command line — the project files also declare
+   `RuntimeIdentifier`/`SelfContained` (in `Directory.Build.targets`), but
+   confirmed on a real Windows build that those settings alone don't
+   reliably produce the `win-x64` output folder; only the explicit CLI
+   flags do:
 
    ```
-   dotnet publish src\MediaSuite.Manager -c Release
-   dotnet publish src\MediaSuite.Tools.PdfToPng -c Release
-   dotnet publish src\MediaSuite.Tools.MergePdf -c Release
-   dotnet publish src\MediaSuite.Tools.FfmpegConvert -c Release
-   dotnet publish src\MediaSuite.Tools.ReduceForYouTube -c Release
-   dotnet publish src\MediaSuite.Tools.MakePdf -c Release
+   dotnet publish src\MediaSuite.Manager -c Release -r win-x64 --self-contained true
+   dotnet publish src\MediaSuite.Tools.PdfToPng -c Release -r win-x64 --self-contained true
+   dotnet publish src\MediaSuite.Tools.MergePdf -c Release -r win-x64 --self-contained true
+   dotnet publish src\MediaSuite.Tools.FfmpegConvert -c Release -r win-x64 --self-contained true
+   dotnet publish src\MediaSuite.Tools.ReduceForYouTube -c Release -r win-x64 --self-contained true
+   dotnet publish src\MediaSuite.Tools.MakePdf -c Release -r win-x64 --self-contained true
    ```
 
 2. Open `installer\MediaToolsSuite.iss` in the Inno Setup Compiler (or run
@@ -47,13 +51,16 @@ Windows.
   removing files, then shows a message clarifying that FFmpeg, Ghostscript,
   and ImageMagick are deliberately left installed.
 
-## Not verified here
+## Status
 
-This `.iss` file has not been compiled or run. The development environment
-for this repository is Linux, and Inno Setup itself only runs on Windows (an
-attempt to run it under Wine in that environment failed for unrelated Wine
-configuration reasons, not anything specific to this script). The script was
-written carefully against documented Inno Setup 6.x syntax, but it needs a
-real build-and-install pass on Windows before being trusted — in particular,
-double-check that the `dotnet publish` output paths referenced in `[Files]`
-match what your SDK version actually produces.
+The `dotnet publish` step above (with the explicit `-r win-x64
+--self-contained true` flags) has been confirmed on a real Windows machine to
+produce the `win-x64\publish` output folders the `[Files]` section expects.
+
+Compiling the `.iss` script itself with Inno Setup has not yet been
+confirmed — that step is still pending a real test pass. The script was
+written carefully against documented Inno Setup 6.x syntax (an attempt to
+validate it under Wine in this repo's Linux development environment failed
+for unrelated Wine configuration reasons, not anything specific to this
+script), but treat it as unverified until it's actually been compiled and
+the resulting installer run through end to end.

@@ -10,13 +10,17 @@
 ; those three.
 ;
 ; Build with Inno Setup 6.x (tested against 6.7.3) on Windows, after
-; publishing every project in Release configuration:
-;   dotnet publish src\MediaSuite.Manager -c Release
-;   dotnet publish src\MediaSuite.Tools.PdfToPng -c Release
-;   dotnet publish src\MediaSuite.Tools.MergePdf -c Release
-;   dotnet publish src\MediaSuite.Tools.FfmpegConvert -c Release
-;   dotnet publish src\MediaSuite.Tools.ReduceForYouTube -c Release
-;   dotnet publish src\MediaSuite.Tools.MakePdf -c Release
+; publishing every project in Release configuration. The -r/--self-contained
+; flags must be passed explicitly on the command line - the project files
+; declare RuntimeIdentifier/SelfContained too, but confirmed on a real build
+; that those alone do not reliably produce the win-x64 output folder these
+; [Files] entries expect; only the explicit CLI flags do:
+;   dotnet publish src\MediaSuite.Manager -c Release -r win-x64 --self-contained true
+;   dotnet publish src\MediaSuite.Tools.PdfToPng -c Release -r win-x64 --self-contained true
+;   dotnet publish src\MediaSuite.Tools.MergePdf -c Release -r win-x64 --self-contained true
+;   dotnet publish src\MediaSuite.Tools.FfmpegConvert -c Release -r win-x64 --self-contained true
+;   dotnet publish src\MediaSuite.Tools.ReduceForYouTube -c Release -r win-x64 --self-contained true
+;   dotnet publish src\MediaSuite.Tools.MakePdf -c Release -r win-x64 --self-contained true
 ; then open this .iss in the Inno Setup Compiler (or run ISCC.exe against
 ; it) from this "installer" folder.
 
