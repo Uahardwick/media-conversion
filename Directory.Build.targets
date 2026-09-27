@@ -1,0 +1,18 @@
+<Project>
+
+  <!-- Directory.Build.props is imported before each project's own
+       PropertyGroup, so a condition here couldn't see OutputType=WinExe -
+       it hadn't been set yet, and this whole block silently never applied.
+       Directory.Build.targets is imported after the project's own body, so
+       the condition actually sees the value. Applies only to the Manager
+       and the five WinExe tool projects, not Core or its tests, which stay
+       plain library builds. -->
+  <PropertyGroup Condition="'$(OutputType)' == 'WinExe'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
+</Project>
